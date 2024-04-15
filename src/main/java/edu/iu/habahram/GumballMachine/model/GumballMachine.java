@@ -70,6 +70,26 @@ public class GumballMachine implements IGumballMachine {
     }
 
     @Override
+    public TransitionResult refill(int count) {
+        boolean succeeded = false;
+        String message = "";
+        if (state.equalsIgnoreCase(HAS_QUARTER)) {
+            message = "You can't refill while there is a quarter in the machine";
+        } else if (state.equalsIgnoreCase(NO_QUARTER)) {
+            state = SOLD_OUT;
+            message = "Machine refilled";
+            succeeded = true;
+        } else if (state.equalsIgnoreCase(SOLD_OUT)) {
+            state = NO_QUARTER;
+            message = "Machine refilled";
+            succeeded = true;
+        } else if (state.equalsIgnoreCase(SOLD)) {
+            message = "You can't refill while there is a quarter in the machine";
+        }
+        return new TransitionResult(succeeded, message, state, count);
+    }
+
+    @Override
     public void changeTheStateTo(GumballMachineState name) {
 
     }

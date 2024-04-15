@@ -9,5 +9,7 @@ public interface IState {
 
     TransitionResult dispense();
 
+    TransitionResult refill(int count);
+
     String getTheName();
 }

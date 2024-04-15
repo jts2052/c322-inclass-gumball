@@ -46,4 +46,11 @@ public class SoldState implements IState {
     public String getTheName() {
         return GumballMachineState.GUMBALL_SOLD.name();
     }
+
+    @Override
+    public TransitionResult refill(int count) {
+        String message = "You can't refill the machine now";
+        boolean succeeded = false;
+        return new TransitionResult(succeeded, message, gumballMachine.getTheStateName(), gumballMachine.getCount());
+    }
 }
